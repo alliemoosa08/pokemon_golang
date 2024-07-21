@@ -1,0 +1,21 @@
+get:
+  summary: Retrieve a list of Pokemons
+  operationId: getPokemons
+  tags:
+    - pokemons
+  responses:
+    200:
+      description: A list of Pokemons
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "bulbasaur"
+                url:
+                  type: string
+                  example: "https://pokeapi.co/api/v2/pokemon/1/"

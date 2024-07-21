@@ -1,0 +1,18 @@
+{
+  "name": "pokemon-api-specification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "swagger-cli bundle --dereference --outfile ./dist/api.json ./src/index.yaml",
+    "start": "swagger-ui-watcher ./src/index.yaml",
+    "test": "npm run build && swagger-cli validate ./dist/api.json"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "swagger-cli": "^4.0.4",
+    "swagger-ui-watcher": "^2.1.14"
+  }
+}

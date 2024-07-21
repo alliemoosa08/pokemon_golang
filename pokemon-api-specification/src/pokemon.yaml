@@ -1,0 +1,76 @@
+get:
+  summary: Retrieve information about a specific Pokémon
+  operationId: getPokemonByID
+  tags:
+    - pokemons
+  parameters:
+    - in: path
+      name: id
+      required: true
+      description: Pokémon ID
+      schema:
+        type: integer
+  responses:
+    200:
+      description: Returns a single Pokémon
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              ability:
+                type: array
+                items:
+                  type: object
+              base_experience:
+                type: integer
+              cries:
+                type: object
+              forms:
+                type: array
+                items:
+                  type: object
+              game_indices:
+                type: object
+              height:
+                type: integer
+              held_items:
+                type: array
+                items:
+                  type: object
+              id:
+                type: integer
+              is_default:
+                type: boolean
+              location_area_encounters:
+                type: string
+              moves:
+                type: array
+                items:
+                  type: object
+              name:
+                type: string
+              order:
+                type: integer
+              past_abilities:
+                type: array
+                items:
+                  type: object
+              past_types:
+                type: array
+                items:
+                  type: object
+              species:
+                type: object
+              sprites:
+                type: object
+              stats:
+                type: array
+                items:
+                  type: object
+              types:
+                type: array
+                items:
+                  type: object
+              weight:
+                type: integer

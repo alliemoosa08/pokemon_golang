@@ -1,0 +1,12 @@
+openapi: 3.0.0
+info:
+  title: Pokemon API Specification
+  version: 1.0.0
+  description: API Specification that guide users/developers how the system is structured.
+servers:
+  - url: http://localhost:8080
+paths:
+  /pokemons:
+    $ref: "pokemons.yaml"
+  /pokemons/{id}:
+    $ref: "pokemon.yaml"
