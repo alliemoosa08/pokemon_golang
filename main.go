@@ -13,10 +13,10 @@ var router = mux.NewRouter().StrictSlash(true)
 func main() {
 	PokemonHandler()
 	var portNumber = "8080"
-	fmt.Println("Listening on IP 172.0.0.1:" + portNumber)
+	fmt.Println("Listening on IP 0.0.0.0:" + portNumber)
 
 	handle := cors.AllowAll().Handler(router)
-	err := http.ListenAndServe(":"+portNumber, handle)
+	err := http.ListenAndServe("0.0.0.0:"+portNumber, handle)
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return
