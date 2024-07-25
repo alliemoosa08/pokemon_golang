@@ -1,0 +1,46 @@
+#configuration file defines the steps to build, push, and deploy a Docker container using Google Cloud Build
+
+substitutions:
+  _GCR_HOSTNAME: 'gcr.io'
+  _PROJECT_ID: 'pokemon-project-430504'
+  _SERVICE_NAME: 'pokemon-golang'
+  _DEPLOY_REGION: 'us-central1'
+  _PLATFORM: 'managed'
+
+steps:
+# Step 1: Build the Docker image
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - '-t'
+      - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+      - .
+
+# Step 2: Push the Docker image to Google Container Registry
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+
+ # Step 3: Deploy the Docker image to Cloud Run or another Google Cloud platform
+  - name: gcr.io/google.com/cloudsdktool/cloud-sdk
+    args:
+      - run
+      - deploy
+      - $_SERVICE_NAME
+      - '--image'
+      - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+      - '--region'
+      - $_DEPLOY_REGION
+      - '--platform'
+      - $_PLATFORM
+    entrypoint: gcloud
+# Define the timeout for the entire build process
+timeout: 1200s
+
+# Specify the images to be pushed to the registry
+images:
+  - '$_GCR_HOSTNAME/$PROJECT_ID/$_SERVICE_NAME:$COMMIT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
